@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizador de estudos do Thurzin Atelier of Witch Hat</title>
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Estilos Externos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Elemento da Varinha de Bruxo -->
+  <div class="magic-wand" id="wand"></div>
+
+  <!-- Cabeçalho Mágico -->
+  <header class="header">
+    <div class="header-badge">✦ Ateliê dos Bruxos Acadêmicos ✦</div>
+    <h1 class="header-title">Organizador de estudos do Thurzin Atelier of Witch Hat</h1>
+    <p class="header-subtitle">
+      Protótipo de mapeamento de selos mágicos (problemas de rotina, insatisfações e incômodos no dia a dia de estudos). Clique nos cards para conjurar os detalhes do grimório.
+    </p>
+
+    <div class="interactive-panel">
+      <button class="spell-btn" onclick="triggerMagicSpell()">
+        <span>✨ Cast Spell: Purificar Foco</span>
+      </button>
+      
+      <div class="hat-toggle" id="hatToggle" onclick="toggleHatState()">
+        <svg class="hat-icon" viewBox="0 0 100 100">
+          <path d="M50 5 L75 75 L95 85 C95 85 70 95 50 95 C30 95 5 85 5 85 L25 75 Z" fill="#2d2b55" stroke="#f2d080" stroke-width="2"/>
+          <path d="M25 75 C35 82 65 82 75 75" fill="none" stroke="#d4af37" stroke-width="3"/>
+          <polygon points="50,15 54,25 65,25 56,32 59,42 50,36 41,42 44,32 35,25 46,25" fill="#f2d080"/>
+        </svg>
+        <span class="hat-label" id="hatLabel">Modo Bruxaria Ativado</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <div class="filters-container">
+    <button class="filter-chip active" onclick="filterCards('all', this)">✦ Todos os Selos</button>
+    <button class="filter-chip" onclick="filterCards('problema', this)">📜 Desafios de Rotina</button>
+    <button class="filter-chip" onclick="filterCards('incomodo', this)">⚠️ Incômodos do Dia a Dia</button>
+    <button class="filter-chip" onclick="filterCards('insatisfacao', this)">🔮 Frustrações Internas</button>
+  </div>
+
+  <!-- Grid de Cards -->
+  <main class="cards-grid" id="cardsGrid">
+
+    <!-- Card 1 -->
+    <article class="card" data-category="problema" onclick="openModal('modal1')">
+      <div class="card-tag">Desafio de Rotina</div>
+      <h2 class="card-title">Acúmulo Diabólico de Matérias</h2>
+      <p class="card-excerpt">
+        Deixar páginas e capítulos acumularem até que a montanha de conteúdos pareça uma maldição incontrolável antes dos exames.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Alta</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" data-category="incomodo" onclick="openModal('modal2')">
+      <div class="card-tag">Incômodo do Dia a Dia</div>
+      <h2 class="card-title">Distrações e Feitiços do Celular</h2>
+      <p class="card-excerpt">
+        A constante interrupção por notificações e redes sociais que quebram o fluxo de concentração do bruxo aprendiz.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Média</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card" data-category="insatisfacao" onclick="openModal('modal3')">
+      <div class="card-tag">Frustração Interna</div>
+      <h2 class="card-title">Sensação de Estudar sem Progresso</h2>
+      <p class="card-excerpt">
+        Passar horas debruçado sobre os livros e sentir que nenhum conhecimento foi realmente absorvido ou gravado na memória.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Crítica</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card" data-category="problema" onclick="openModal('modal4')">
+      <div class="card-tag">Desafio de Rotina</div>
+      <h2 class="card-title">A Maldição da Procrastinação</h2>
+      <p class="card-excerpt">
+        Adiar o início dos estudos com tarefas irrelevantes, resultando em sessões noturnas cansativas e pouco produtivas.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Alta</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="card" data-category="incomodo" onclick="openModal('modal5')">
+      <div class="card-tag">Incômodo do Dia a Dia</div>
+      <h2 class="card-title">Ambiente de Estudo Caótico</h2>
+      <p class="card-excerpt">
+        Falta de um espaço silencioso e organizado, com ruídos externos e mesa bagunçada que dispersam a atenção.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Média</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="card" data-category="insatisfacao" onclick="openModal('modal6')">
+      <div class="card-tag">Frustração Interna</div>
+      <h2 class="card-title">Exaustão e Esgotamento Mágico</h2>
+      <p class="card-excerpt">
+        Falta de equilíbrio entre o tempo de estudo e o descanso, gerando fadiga mental extrema e perda de motivação.
+      </p>
+      <div class="card-footer">
+        <span class="badge-severity">Severidade: Crítica</span>
+        <span class="card-action">Explorar Grimório →</span>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>✦ Thurzin Atelier of Witch Hat — Protótipo de Design para Organização Acadêmica ✦</p>
+    <p style="margin-top: 6px; opacity: 0.7;">Inspirado na arte e magia de Shirahama Kamome (Witch Hat Atelier)</p>
+  </footer>
+
+  <!-- MODAIS (SISTEMA DE GRIMÓRIO) -->
+
+  <div class="modal-overlay" id="modal1">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Desafio de Rotina</span>
+        <h2 class="modal-title">Acúmulo Diabólico de Matérias</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>Sem um cronograma claro, os tópicos de estudo se acumulam em ritmo acelerado. Quando o estudante percebe, precisa revisar meses de conteúdo em poucos dias, gerando pânico e estudo superficial.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Aumento expressivo da ansiedade, noites mal dormidas antes de avaliações e sensação constante de estar "atrás dos outros aprendizes".</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Implementação de "Pactos Diários" — pequenas metas de leitura revisadas diariamente com o método de repetição espaçada, evitando que o monstro da matéria acumulada se forme.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal1')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal2">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Incômodo do Dia a Dia</span>
+        <h2 class="modal-title">Distrações e Feitiços do Celular</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>O hábito involuntário de pegar o smartphone a cada 10 minutos para checar mensagens, feeds ou vídeos, fragmentando totalmente o estado de foco profundo.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Uma sessão de estudo que levaria 1 hora acaba durando 3 horas, deixando a sensação de dia improdutivo e cansaço sem ter realmente avançado.</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Técnica "Barreira da Varinha": colocar o celular em outro cômodo durante ciclos Pomodoro de 25 minutos, recompensando-se com pequenas pausas conscientes.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal2')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal3">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Frustração Interna</span>
+        <h2 class="modal-title">Sensação de Estudar sem Progresso</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>Estudar de forma passiva (apenas lendo ou grifando textos) gera uma ilusão de aprendizado que se desfaz na hora de resolver exercícios ou explicar o tema.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Sentimento de incapacidade pessoal, desmotivação e dúvida se você realmente tem aptidão para aquele campo de conhecimento.</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Uso da "Técnica de Ensino de Coco" (Feynman): explicar a matéria em voz alta para si mesmo ou em notas simples, ativando a retenção real e prática do conhecimento.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal3')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal4">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Desafio de Rotina</span>
+        <h2 class="modal-title">A Maldição da Procrastinação</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>Dificuldade psíquica para dar o primeiro passo. O cérebro inventa pequenas tarefas paralelas (arrumar o quarto, checar e-mails) para adiar o esforço de estudar.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Culpa constante durante os momentos de lazer, já que a pendência do estudo continua flutuando sobre a cabeça como uma nuvem negra.</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Regra dos 5 Minutos de Magia: comprometer-se a estudar por apenas 5 minutos. Uma vez rompida a inércia inicial, a tendência é continuar o fluxo de trabalho.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal4')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal5">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Incômodo do Dia a Dia</span>
+        <h2 class="modal-title">Ambiente de Estudo Caótico</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>Mesa cheia de papéis aleatórios, barulho familiar ou de trânsito e falta de iluminação adequada tornam o momento de estudo desconfortável.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Cansaço visual rápido, postura inadequada e irritabilidade frequente antes mesmo de começar a ler a primeira página.</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Rituais de Preparação do Sanctum: limpar o espaço de trabalho no início da sessão, usar fones com ruído marrom/música instrumental e organizar os materiais necessários com antecedência.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal5')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal6">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="card-tag">Frustração Interna</span>
+        <h2 class="modal-title">Exaustão e Esgotamento Mágico</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📜 O Incômodo Mapeado</h3>
+          <p>Ignorar o descanso e tentar estudar além dos limites saudáveis, levando a um estado de fadiga crônica e falta de energia.</p>
+        </div>
+        <div class="modal-section">
+          <h3>⚡ Impacto na Rotina</h3>
+          <p>Queda brusca no rendimento geral, esquecimento rápido das matérias lidas e apatia em relação às atividades diárias.</p>
+        </div>
+        <div class="modal-section">
+          <h3>✨ Encantamento de Solução (Atelier Idea)</h3>
+          <p>Restauração do Mana: incluir pausas ativas obrigatórias no dia, valorizar o sono reparador e ter hobbies sem relação com os estudos para recarregar a mente.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-close" onclick="closeModal('modal6')">Fechar Grimório</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script JS Interativo -->
+  <script>
+    const wand = id('wand');
+    let mouseX = 0, mouseY = 0;
+    let wandX = 0, wandY = 0;
+
+    function id(str) { return document.getElementById(str); }
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      if (Math.random() < 0.25) {
+        createParticle(e.clientX, e.clientY);
+      }
+    });
+
+    function animateWand() {
+      wandX += (mouseX - wandX) * 0.2;
+      wandY += (mouseY - wandY) * 0.2;
+      wand.style.left = wandX + 'px';
+      wand.style.top = wandY + 'px';
+      requestAnimationFrame(animateWand);
+    }
+    animateWand();
+
+    function createParticle(x, y) {
+      const particle = document.createElement('div');
+      particle.className = 'sparkle';
+      particle.style.left = (x + (Math.random() * 20 - 10)) + 'px';
+      particle.style.top = (y + (Math.random() * 20 - 10)) + 'px';
+      
+      const colors = ['#f2d080', '#e0be68', '#fceabb', '#a8a2d8', '#ffffff'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      const size = Math.random() * 6 + 3;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      
+      document.body.appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 800);
+    }
+
+    function openModal(modalId) {
+      const modal = id(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        const rect = modal.querySelector('.modal-container').getBoundingClientRect();
+        for(let i = 0; i < 20; i++) {
+          setTimeout(() => {
+            createParticle(
+              rect.left + Math.random() * rect.width,
+              rect.top + Math.random() * rect.height
+            );
+          }, i * 15);
+        }
+      }
+    }
+
+    function closeModal(modalId) {
+      const modal = id(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+          modal.classList.remove('active');
+        });
+      }
+    });
+
+    function filterCards(category, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+          card.style.animation = 'fadeIn 0.5s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    let hatState = true;
+    function toggleHatState() {
+      hatState = !hatState;
+      const hatToggle = id('hatToggle');
+      const hatLabel = id('hatLabel');
+
+      if (hatState) {
+        hatToggle.classList.remove('inactive');
+        hatLabel.innerText = 'Modo Bruxaria Ativado';
+      } else {
+        hatToggle.classList.add('inactive');
+        hatLabel.innerText = 'Modo Aprendiz Silencioso';
+      }
+    }
+
+    function triggerMagicSpell() {
+      for (let i = 0; i < 60; i++) {
+        setTimeout(() => {
+          createParticle(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight
+          );
+        }, i * 20);
+      }
+    }
+  </script>
+</body>
+</html>
